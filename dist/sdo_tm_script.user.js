@@ -6,6 +6,8 @@
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
 // @match      https://chdact2.web.sdo.com/project/kwl_*
+// @match      https://chdact2.web.sdo.com/project/120629lz/home.asp
+// @match      https://chdact2.web.sdo.com/project/Chicas/Index.asp
 // @require    https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js
 // @require    https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js
 // ==/UserScript==
@@ -36025,6 +36027,101 @@
       });
     }
   }
+  class QKS extends Action {
+    constructor() {
+      super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas/Index.asp", [
+        { field: "id", headerName: "ID", type: "number", width: 80 },
+        { field: "dateTime", headerName: "获得时间", width: 300 },
+        { field: "mapId", headerName: "地图编号", width: 200 },
+        { field: "name", headerName: "道具名称", width: 400 },
+        { field: "token", headerName: "道具编码", width: 400 },
+        { field: "isNow", headerName: "当期宝物", type: "boolean", width: 100 }
+      ], []);
+    }
+    GetData(set) {
+      const instance = axios$1.create({
+        baseURL: "https://chdact2.web.sdo.com",
+        timeout: 1e3,
+        method: "get",
+        responseType: "text",
+        responseEncoding: "utf-8"
+      });
+      this.GetDataByPage(instance, set, 1, 2);
+      this.GetDataByPage(instance, set, 1, 1);
+    }
+    async GetDataByPage(instance, set, page, ctype) {
+      instance.get("/project/Chicas/inc/getorder.asp", {
+        params: {
+          page,
+          ctype
+        }
+      }).then((response) => {
+        console.log(` --- 獲取第 ${page} 頁資料 --- `);
+        let result = JSON.parse(response.data);
+        result.datalist.forEach((item) => {
+          set((pre) => [...pre, {
+            dateTime: item.CreateTime,
+            mapId: item.couponNum,
+            name: item.ItemName,
+            token: item.OrderId,
+            isNow: 1 == ctype
+          }]);
+        });
+        if (result.datalist.length == 7) {
+          this.GetDataByPage(instance, set, page + 1, ctype);
+        }
+      });
+    }
+  }
+  class LZ extends Action {
+    constructor() {
+      super(
+        "礼赞 ",
+        "https://chdact2.web.sdo.com/project/120629lz/home.asp",
+        [
+          { field: "id", headerName: "ID", type: "number", width: 80 },
+          { field: "name", headerName: "道具名称", width: 400 },
+          { field: "token", headerName: "道具编码", width: 400 }
+        ],
+        []
+      );
+    }
+    GetData(set) {
+      const instance = axios$1.create({
+        baseURL: "https://chdact2.web.sdo.com",
+        timeout: 1e3,
+        method: "get",
+        responseType: "text",
+        responseEncoding: "utf-8"
+      });
+      this.GetDataByPage(instance, set, 1);
+    }
+    async GetDataByPage(instance, set, page) {
+      instance.get("/project/120629lz/orderlist.asp", {
+        params: {
+          page,
+          id: 2
+        }
+      }).then((response) => {
+        console.log(` --- 獲取第 ${page} 頁資料 --- `);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(response.data, "text/html");
+        const trs = doc.querySelectorAll("tr");
+        for (let index = 1; index < trs.length; index++) {
+          let tr = trs[index];
+          let row = tr.querySelectorAll(`td`);
+          let item = {
+            name: row[1].innerText,
+            token: row[0].innerText
+          };
+          set((pre) => [...pre, item]);
+        }
+        if (trs.length == 12) {
+          this.GetDataByPage(instance, set, page + 1);
+        }
+      });
+    }
+  }
   function App() {
     const [open, setOpen] = React.useState(false);
     const [list, setList] = React.useState([]);
@@ -36032,7 +36129,9 @@
     React.useEffect(() => {
       setList([
         new ChdGrade(),
-        new KWY()
+        new KWY(),
+        new LZ(),
+        new QKS()
       ]);
     }, []);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: list.filter((k2) => k2.MatchURL()).map((k2) => {
