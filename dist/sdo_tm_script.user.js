@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name       愛哭包專用 - 盛趣腳本
 // @namespace  JWLWJ
-// @version    2.0.5
+// @version    2.1
 // @author     monkey
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
 // @match      https://chdact2.web.sdo.com/project/kwl_*
 // @match      https://chdact2.web.sdo.com/project/120629lz/home.asp
-// @match      https://chdact2.web.sdo.com/project/Chicas
+// @match      https://chdact2.web.sdo.com/project/Chicas/*
 // @require    https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js
 // @require    https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js
 // ==/UserScript==
