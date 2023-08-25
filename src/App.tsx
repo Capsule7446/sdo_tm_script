@@ -3,6 +3,7 @@ import Fab from '@mui/material/Fab';
 import ListRoundedIcon from '@mui/icons-material/ListRounded';
 import {MyModal} from './components';
 import {Action,ChdGrade, KWY} from './actions';
+import {LZ} from "./actions/LZ";
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
   useEffect(() => {
     setList([
       new ChdGrade(),
-      new KWY()
+      new KWY(),
+      new LZ()
     ])
   }, [])
 
