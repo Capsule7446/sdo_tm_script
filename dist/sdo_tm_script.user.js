@@ -3917,7 +3917,6 @@
             name: "",
             token: ""
           });
-          console.log(tds);
           if (tds[3].querySelectorAll("br").length > 0) {
             let names = tds[3].innerHTML.split("<br>").filter((k2) => k2 != "");
             let tokens = tds[4].innerHTML.split("<br>").filter((k2) => k2 != "");
@@ -3927,7 +3926,6 @@
                 name: names[index2],
                 token: tokens[index2]
               };
-              console.log(aaa);
               setData((pre) => {
                 return [...pre, aaa];
               });
