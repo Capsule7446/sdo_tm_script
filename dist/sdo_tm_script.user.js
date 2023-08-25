@@ -5,6 +5,7 @@
 // @author     monkey
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
+// @match      https://chdact2.web.sdo.com/project/kwl_*
 // @require    https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js
 // @require    https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js
 // ==/UserScript==
@@ -33893,6 +33894,27 @@
       }
     );
   };
+  class Action {
+    constructor(name, url, columns, data) {
+      __publicField(this, "Name");
+      __publicField(this, "Url");
+      __publicField(this, "Columns");
+      __publicField(this, "Data");
+      this.Name = name;
+      this.Url = url;
+      this.Columns = columns;
+      this.Data = data;
+    }
+    MatchURL() {
+      const nowUrl = new URL(window.location.href);
+      const tagretUrl = new URL(this.Url);
+      if (nowUrl.host == tagretUrl.host && nowUrl.pathname == tagretUrl.pathname) {
+        console.log(`「${this.Name}」匹配成功`);
+        return true;
+      }
+      return false;
+    }
+  }
   function bind(fn2, thisArg) {
     return function wrap() {
       return fn2.apply(thisArg, arguments);
@@ -35892,27 +35914,6 @@
   axios.HttpStatusCode = HttpStatusCode$1;
   axios.default = axios;
   const axios$1 = axios;
-  class Action {
-    constructor(name, url, columns, data) {
-      __publicField(this, "Name");
-      __publicField(this, "Url");
-      __publicField(this, "Columns");
-      __publicField(this, "Data");
-      this.Name = name;
-      this.Url = url;
-      this.Columns = columns;
-      this.Data = data;
-    }
-    MatchURL() {
-      const nowUrl = new URL(window.location.href);
-      const tagretUrl = new URL(this.Url);
-      if (nowUrl.host == tagretUrl.host && nowUrl.pathname == tagretUrl.pathname) {
-        console.log(`「${this.Name}」匹配成功`);
-        return true;
-      }
-      return false;
-    }
-  }
   class ChdGrade extends Action {
     constructor() {
       super(
@@ -35920,11 +35921,11 @@
         "https://chdact2.web.sdo.com/project/ChdGrade/order.asp",
         [
           { field: "id", headerName: "ID", type: "number", width: 80 },
-          { field: "dateTime", headerName: "購買日期", type: "date", width: 200 },
-          { field: "orderId", headerName: "訂單編號", width: 400 },
-          { field: "packageName", headerName: "禮包名稱", width: 150 },
-          { field: "name", headerName: "道具名稱", width: 150 },
-          { field: "token", headerName: "道具編碼", width: 400 }
+          { field: "dateTime", headerName: "购买日期", type: "date", width: 200 },
+          { field: "orderId", headerName: "订单编号", width: 400 },
+          { field: "packageName", headerName: "礼包代码", width: 150 },
+          { field: "name", headerName: "道具名称", width: 150 },
+          { field: "token", headerName: "道具编码", width: 400 }
         ],
         []
       );
@@ -35975,13 +35976,63 @@
       });
     }
   }
+  class KWY extends Action {
+    constructor() {
+      super(
+        "卡哇伊",
+        "https://chdact2.web.sdo.com/project/kwl_090604/Index.asp",
+        [
+          { field: "id", headerName: "ID", type: "number", width: 80 },
+          { field: "name", headerName: "道具名称", width: 400 },
+          { field: "token", headerName: "道具编码", width: 400 }
+        ],
+        []
+      );
+    }
+    GetData(set) {
+      const instance = axios$1.create({
+        baseURL: "https://chdact2.web.sdo.com",
+        timeout: 1e3,
+        method: "get",
+        responseType: "text",
+        responseEncoding: "utf-8"
+      });
+      this.GetDataByPage(instance, set, 1);
+    }
+    async GetDataByPage(instance, set, page) {
+      instance.get("/project/kwl_090604/orderlist.asp", {
+        params: {
+          page,
+          id: 2
+        }
+      }).then((response) => {
+        console.log(` --- 獲取第 ${page} 頁資料 --- `);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(response.data, "text/html");
+        const trs = doc.querySelectorAll("tr");
+        for (let index = 1; index < trs.length; index++) {
+          let tr = trs[index];
+          let row = tr.querySelectorAll(`td`);
+          let item = {
+            name: row[1].innerText,
+            token: row[0].innerText
+          };
+          set((pre) => [...pre, item]);
+        }
+        if (trs.length == 12) {
+          this.GetDataByPage(instance, set, page + 1);
+        }
+      });
+    }
+  }
   function App() {
     const [open, setOpen] = React.useState(false);
     const [list, setList] = React.useState([]);
     const handleOpen = () => setOpen(true);
     React.useEffect(() => {
       setList([
-        new ChdGrade()
+        new ChdGrade(),
+        new KWY()
       ]);
     }, []);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: list.filter((k2) => k2.MatchURL()).map((k2) => {

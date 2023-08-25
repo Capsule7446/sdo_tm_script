@@ -2,17 +2,20 @@ import axios, {AxiosInstance, AxiosResponse} from 'axios'
 import {Action} from '.';
 import {GridRowsProp} from '@mui/x-data-grid';
 
+/**
+ * 等级补完
+ */
 class ChdGrade extends Action {
 
     constructor() {
         super("等級補完", "https://chdact2.web.sdo.com/project/ChdGrade/order.asp",
             [
                 {field: 'id', headerName: 'ID', type: 'number', width: 80},
-                {field: 'dateTime', headerName: '購買日期', type: 'date', width: 200},
-                { field: 'orderId', headerName: '訂單編號', width: 400 },
-                { field: 'packageName', headerName: '禮包名稱', width: 150 },
-                { field: 'name', headerName: '道具名稱', width: 150 },
-                { field: 'token', headerName: '道具編碼', width: 400 },
+                {field: 'dateTime', headerName: '购买日期', type: 'date', width: 200},
+                { field: 'orderId', headerName: '订单编号', width: 400 },
+                { field: 'packageName', headerName: '礼包代码', width: 150 },
+                { field: 'name', headerName: '道具名称', width: 150 },
+                { field: 'token', headerName: '道具编码', width: 400 },
             ], [])
     }
     GetData(set: React.Dispatch<React.SetStateAction<GridRowsProp>>) {
@@ -64,4 +67,4 @@ class ChdGrade extends Action {
 
 
 }
-export default ChdGrade
+export {ChdGrade}

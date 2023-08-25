@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Fab from '@mui/material/Fab';
 import ListRoundedIcon from '@mui/icons-material/ListRounded';
-import { MyModal } from './components';
-import ChdGrade from './actions/ChdGrade';
-import { Action } from './actions';
+import {MyModal} from './components';
+import {Action,ChdGrade, KWY} from './actions';
 
 
 function App() {
@@ -14,7 +13,8 @@ function App() {
 
   useEffect(() => {
     setList([
-      new ChdGrade()
+      new ChdGrade(),
+      new KWY()
     ])
   }, [])
 

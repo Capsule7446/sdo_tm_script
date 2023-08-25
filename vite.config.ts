@@ -11,7 +11,7 @@ export default defineConfig({
         name: "愛哭包專用 - 盛趣腳本",
         icon: 'https://cdn-icons-png.flaticon.com/512/3712/3712589.png',
         namespace: 'JWLWJ',
-        match: ['https://chdact2.web.sdo.com/project/ChdGrade/*'],
+        match: ['https://chdact2.web.sdo.com/project/ChdGrade/*','https://chdact2.web.sdo.com/project/kwl_*'],
         version: '1.0.0'
       },
       build: {
