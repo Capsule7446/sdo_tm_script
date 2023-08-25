@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name       t2
+// @name       愛哭包專用 - 盛趣腳本
 // @namespace  npm/vite-plugin-monkey
 // @version    0.0.0
 // @author     monkey
-// @icon       https://vitejs.dev/logo.svg
+// @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/order.asp
 // @require    https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js
 // @require    https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js
@@ -3933,9 +3933,9 @@
               });
             }
           }
-          if (tds.length == 11) {
-            getData(page + 1);
-          }
+        }
+        if (trs.length == 11) {
+          getData(page + 1);
         }
       }).catch((error) => {
         console.error("請求失敗：", error);
@@ -3949,7 +3949,7 @@
       const filteredData = [];
       data.forEach((item) => {
         const exists = filteredData.some(
-          (d) => d.order === item.order && d.name === item.name
+          (d) => d.order === item.order && d.name === item.name && d.token === item.token
         );
         if (!exists) {
           filteredData.push(item);

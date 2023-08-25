@@ -9,7 +9,8 @@ export default defineConfig({
     monkey({
       entry: 'src/main.tsx',
       userscript: {
-        icon: 'https://vitejs.dev/logo.svg',
+        name:"愛哭包專用 - 盛趣腳本",
+        icon: 'https://cdn-icons-png.flaticon.com/512/3712/3712589.png',
         namespace: 'npm/vite-plugin-monkey',
         match: ['https://chdact2.web.sdo.com/project/ChdGrade/order.asp'],  
       },
