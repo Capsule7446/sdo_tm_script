@@ -1,14 +1,14 @@
-import axios, { AxiosResponse, AxiosInstance } from 'axios'
-import { Action } from '.';
-import { GridRowsProp } from '@mui/x-data-grid';
+import axios, {AxiosInstance, AxiosResponse} from 'axios'
+import {Action} from '.';
+import {GridRowsProp} from '@mui/x-data-grid';
 
 class ChdGrade extends Action {
 
     constructor() {
         super("等級補完", "https://chdact2.web.sdo.com/project/ChdGrade/order.asp",
             [
-                { field: 'id', headerName: 'ID', width: 80 },
-                { field: 'dateTime', headerName: '購買日期', width: 200 },
+                {field: 'id', headerName: 'ID', type: 'number', width: 80},
+                {field: 'dateTime', headerName: '購買日期', type: 'date', width: 200},
                 { field: 'orderId', headerName: '訂單編號', width: 400 },
                 { field: 'packageName', headerName: '禮包名稱', width: 150 },
                 { field: 'name', headerName: '道具名稱', width: 150 },
@@ -44,7 +44,7 @@ class ChdGrade extends Action {
                     let tokens = tds[4].innerHTML.split('<br>').filter(k => k != '')
                     for (let index2 = 0; index2 < names.length; index2++) {
                         let item = {
-                            dateTime: tds[0].innerHTML.replace("<br>", " | "),
+                            dateTime: new Date(tds[0].innerHTML.replace("<br>", " ")) ,
                             orderId: tds[1].innerHTML,
                             packageName: tds[2].innerHTML,
                             name: names[index2],

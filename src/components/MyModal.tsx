@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, {useEffect, useState} from "react"
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import {
-    DataGrid,
-    GridToolbar,
-    GridRowsProp,
-    GridFilterModel,
-    GridColumnVisibilityModel,
-} from '@mui/x-data-grid';
-import { Action } from "../actions";
-
-
+import {DataGrid, GridColumnVisibilityModel, GridFilterModel, GridRowsProp, GridToolbar,} from '@mui/x-data-grid';
+import {Action} from "../actions";
 
 
 interface ModalProps {
@@ -61,13 +53,12 @@ const MyModal: React.FC<ModalProps> = (props: ModalProps) => {
             border: '2px solid #000',
             boxShadow: `24`,
             p: `4`,
-            zIndex: `10000`
+            zIndex: `10000`,
+            height: `80vh`
         }}>
             <DataGrid
                 columns={props.data.Columns}
                 rows={showRows}
-                disableColumnFilter
-                disableDensitySelector
                 slots={{ toolbar: GridToolbar }}
                 filterModel={filterModel}
                 onFilterModelChange={(newModel) => setFilterModel(newModel)}
