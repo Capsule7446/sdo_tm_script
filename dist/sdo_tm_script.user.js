@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name       愛哭包專用 - 盛趣腳本
 // @namespace  JWLWJ
-// @version    2.0.0
+// @version    2.0.2
 // @author     monkey
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
 // @match      https://chdact2.web.sdo.com/project/kwl_*
 // @match      https://chdact2.web.sdo.com/project/120629lz/home.asp
-// @match      https://chdact2.web.sdo.com/project/Chicas/Index.asp
+// @match      https://chdact2.web.sdo.com/project/Chicas
 // @require    https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js
 // @require    https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js
 // ==/UserScript==
@@ -33908,11 +33908,15 @@
       this.Data = data;
     }
     MatchURL() {
-      const nowUrl = new URL(window.location.href);
-      const tagretUrl = new URL(this.Url);
-      if (nowUrl.host == tagretUrl.host && nowUrl.pathname == tagretUrl.pathname) {
-        console.log(`「${this.Name}」匹配成功`);
+      if (window.location.href.includes(this.Url)) {
         return true;
+      } else {
+        const nowUrl = new URL(window.location.href);
+        const tagretUrl = new URL(this.Url);
+        if (nowUrl.host == tagretUrl.host && nowUrl.pathname == tagretUrl.pathname) {
+          console.log(`「${this.Name}」匹配成功`);
+          return true;
+        }
       }
       return false;
     }
@@ -36029,7 +36033,7 @@
   }
   class QKS extends Action {
     constructor() {
-      super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas/Index.asp", [
+      super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas", [
         { field: "id", headerName: "ID", type: "number", width: 80 },
         { field: "dateTime", headerName: "获得时间", width: 300 },
         { field: "mapId", headerName: "地图编号", width: 200 },

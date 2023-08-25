@@ -13,7 +13,7 @@ interface QKSResponseType {
 
 export class QKS extends Action {
 	constructor() {
-		super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas/Index.asp", [
+		super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas", [
 			{field: 'id', headerName: 'ID', type: 'number', width: 80},
 			{field: 'dateTime', headerName: '获得时间', width: 300},
 			{field: 'mapId', headerName: '地图编号', width: 200},
