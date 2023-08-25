@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       愛哭包專用 - 盛趣腳本
 // @namespace  JWLWJ
-// @version    2.0.2
+// @version    2.0.5
 // @author     monkey
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
