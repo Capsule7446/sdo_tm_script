@@ -5,13 +5,14 @@ import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 export class LZ extends Action {
 	constructor() {
-		super("礼赞 ","https://chdact2.web.sdo.com/project/120629lz/home.asp",
+		super("礼赞 ", "https://chdact2.web.sdo.com/project/120629lz/home.asp",
 				[
 					{field: 'id', headerName: 'ID', type: 'number', width: 80},
 					{field: 'name', headerName: '道具名称', width: 400},
 					{field: 'token', headerName: '道具编码', width: 400},
-				],[]);
+				], []);
 	}
+
 	GetData(set: React.Dispatch<React.SetStateAction<GridRowsProp>>) {
 		const instance = axios.create({
 			baseURL: 'https://chdact2.web.sdo.com',
