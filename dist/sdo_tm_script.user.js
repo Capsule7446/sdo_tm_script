@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name       愛哭包專用 - 盛趣腳本
-// @namespace  JWLWJ
-// @version    2.1
-// @author     monkey
+// @namespace  sdo.chd
+// @version    2.2.0
+// @author     爱哭包
 // @icon       https://cdn-icons-png.flaticon.com/512/3712/3712589.png
 // @match      https://chdact2.web.sdo.com/project/ChdGrade/*
 // @match      https://chdact2.web.sdo.com/project/kwl_*
@@ -24100,13 +24100,13 @@
       getLocaleText
     });
   };
-  function _typeof(obj) {
+  function _typeof(o) {
     "@babel/helpers - typeof";
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-      return typeof obj2;
-    } : function(obj2) {
-      return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-    }, _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+      return typeof o2;
+    } : function(o2) {
+      return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+    }, _typeof(o);
   }
   function _toPrimitive(input, hint) {
     if (_typeof(input) !== "object" || input === null)
@@ -33908,17 +33908,7 @@
       this.Data = data;
     }
     MatchURL() {
-      if (window.location.href.includes(this.Url)) {
-        return true;
-      } else {
-        const nowUrl = new URL(window.location.href);
-        const tagretUrl = new URL(this.Url);
-        if (nowUrl.host == tagretUrl.host && nowUrl.pathname == tagretUrl.pathname) {
-          console.log(`「${this.Name}」匹配成功`);
-          return true;
-        }
-      }
-      return false;
+      return this.Url.test(window.location.href);
     }
   }
   function bind(fn2, thisArg) {
@@ -35924,7 +35914,7 @@
     constructor() {
       super(
         "等級補完",
-        "https://chdact2.web.sdo.com/project/ChdGrade/order.asp",
+        /^https:\/\/chdact2\.web\.sdo\.com\/project\/ChdGrade\/.*/,
         [
           { field: "id", headerName: "ID", type: "number", width: 80 },
           { field: "dateTime", headerName: "购买日期", type: "date", width: 200 },
@@ -35986,7 +35976,7 @@
     constructor() {
       super(
         "卡哇伊",
-        "https://chdact2.web.sdo.com/project/kwl_090604/Index.asp",
+        /^https:\/\/chdact2\.web\.sdo\.com\/project\/kwl_.*/,
         [
           { field: "id", headerName: "ID", type: "number", width: 80 },
           { field: "name", headerName: "道具名称", width: 400 },
@@ -36033,7 +36023,7 @@
   }
   class QKS extends Action {
     constructor() {
-      super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas", [
+      super("其卡斯的宝藏", /^https:\/\/chdact2\.web\.sdo\.com\/project\/Chicas.*/, [
         { field: "id", headerName: "ID", type: "number", width: 80 },
         { field: "dateTime", headerName: "获得时间", width: 300 },
         { field: "mapId", headerName: "地图编号", width: 200 },
@@ -36081,7 +36071,7 @@
     constructor() {
       super(
         "礼赞 ",
-        "https://chdact2.web.sdo.com/project/120629lz/home.asp",
+        /^https:\/\/chdact2\.web\.sdo\.com\/project\/120629lz\/.*/,
         [
           { field: "id", headerName: "ID", type: "number", width: 80 },
           { field: "name", headerName: "道具名称", width: 400 },
