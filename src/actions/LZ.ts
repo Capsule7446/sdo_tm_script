@@ -5,7 +5,7 @@ import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 export class LZ extends Action {
 	constructor() {
-		super("礼赞 ", "https://chdact2.web.sdo.com/project/120629lz/home.asp",
+		super("礼赞 ", /^https:\/\/chdact2\.web\.sdo\.com\/project\/120629lz\/.*/,
 				[
 					{field: 'id', headerName: 'ID', type: 'number', width: 80},
 					{field: 'name', headerName: '道具名称', width: 400},

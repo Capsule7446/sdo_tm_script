@@ -8,7 +8,8 @@ import {GridRowsProp} from '@mui/x-data-grid';
 class ChdGrade extends Action {
 
 	constructor() {
-		super("等級補完", "https://chdact2.web.sdo.com/project/ChdGrade/order.asp",
+		super("等級補完",
+				/^https:\/\/chdact2\.web\.sdo\.com\/project\/ChdGrade\/.*/,
 				[
 					{field: 'id', headerName: 'ID', type: 'number', width: 80},
 					{field: 'dateTime', headerName: '购买日期', type: 'date', width: 200},

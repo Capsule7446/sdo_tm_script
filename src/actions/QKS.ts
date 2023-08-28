@@ -14,14 +14,14 @@ interface QKSResponseType {
 
 export class QKS extends Action {
 	constructor() {
-		super("其卡斯的宝藏", "https://chdact2.web.sdo.com/project/Chicas", [
-			{field: 'id', headerName: 'ID', type: 'number', width: 80},
-			{field: 'dateTime', headerName: '获得时间', width: 300},
-			{field: 'mapId', headerName: '地图编号', width: 200},
-			{field: 'name', headerName: '道具名称', width: 400},
-			{field: 'token', headerName: '道具编码', width: 400},
-			{field: 'isNow', headerName: '当期宝物', type: 'boolean', width: 100},
-		], []);
+		super("其卡斯的宝藏", /^https:\/\/chdact2\.web\.sdo\.com\/project\/Chicas.*/, [
+					{field: 'id', headerName: 'ID', type: 'number', width: 80},
+					{field: 'dateTime', headerName: '获得时间', width: 300},
+					{field: 'mapId', headerName: '地图编号', width: 200},
+					{field: 'name', headerName: '道具名称', width: 400},
+					{field: 'token', headerName: '道具编码', width: 400},
+					{field: 'isNow', headerName: '当期宝物', type: 'boolean', width: 100},
+				], []);
 	}
 
 	GetData(set: React.Dispatch<React.SetStateAction<GridRowsProp>>): void {
