@@ -5,7 +5,7 @@ import axios, {AxiosInstance, AxiosResponse} from "axios";
 export class KWY extends Action {
 	constructor() {
 		super(
-				"卡哇伊", "https://chdact2.web.sdo.com/project/kwl_090604/index.asp",
+				"卡哇伊", /^https:\/\/chdact2\.web\.sdo\.com\/project\/kwl_.*/,
 				[
 					{field: 'id', headerName: 'ID', type: 'number', width: 80},
 					{field: 'name', headerName: '道具名称', width: 400},

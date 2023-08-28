@@ -9,9 +9,10 @@ export default defineConfig({
       entry: 'src/main.tsx',
       userscript: {
         name: "愛哭包專用 - 盛趣腳本",
+        author: "爱哭包",
         icon: 'https://cdn-icons-png.flaticon.com/512/3712/3712589.png',
-        version: '2.1',
-        namespace: 'JWLWJ',
+        version: '2.2.0',
+        namespace: 'sdo.chd',
         match: [
           'https://chdact2.web.sdo.com/project/ChdGrade/*',
           'https://chdact2.web.sdo.com/project/kwl_*',
